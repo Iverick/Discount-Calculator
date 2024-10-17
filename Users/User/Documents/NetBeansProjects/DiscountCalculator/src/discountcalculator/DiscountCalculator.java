@@ -17,12 +17,16 @@ public class DiscountCalculator {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Declared paths to input and output files in the following variables.
-        // Makes it easier to change them later.
-        String inputFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DiscountCalculator\\src\\discountcalculator\\customers.txt";
-        String outputFilePath = "TODO: Enter here";
+        // Call this method to read an input file.
+        readInputFile();
+    }
 
-        // This block of code reads the data from an input file
+    // This method is used to read the data from an input file and convert in into a Customer object.
+    private static void readInputFile() {
+        // Declared path to an input file in the following variable.
+        // Makes it easier to change it later.
+        String inputFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DiscountCalculator\\src\\discountcalculator\\customers.txt";
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFilePath))) {
             String userName;
 
@@ -45,9 +49,7 @@ public class DiscountCalculator {
                     // Create a new customer with the data read from the input file.
                     Customer customer = new Customer(userName, baseValue, customerClass, lastPurchaseYear);
                 
-                    System.out.println(customer.getName());
-                    System.out.println(customer.getBaseValue());
-                    System.out.println(customer.getFinalValue());
+                    writeOutputFile(customer);
                 } catch (Exception e) {
                     System.err.println(e);
                 }
@@ -56,6 +58,18 @@ public class DiscountCalculator {
             System.err.println(e);
         }
     }
-
     
+    
+    /**
+     * @param Customer object
+     */
+    // Method used to create and populate output file with customer name and final purchase values.
+    private static void writeOutputFile(Customer customer) {
+        // Declared path to an output file in the following variable.
+        String outputFilePath = "TODO: Enter here";
+        
+        System.out.println(customer.getName());
+        System.out.println(customer.getBaseValue());
+        System.out.println(customer.getFinalValue());
+    }
 }
