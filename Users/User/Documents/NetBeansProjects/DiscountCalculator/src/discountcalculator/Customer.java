@@ -4,6 +4,8 @@
  */
 package discountcalculator;
 
+import java.time.Year;
+
 /**
  *
  * @author User
@@ -16,7 +18,7 @@ public class Customer {
     private double baseValue;
     private double discount;
     private double finalValue;
-    
+
     // Construcor for the Person object.
     // Sets object properties based on the data we read from the input file.
     public Customer(String name, double baseValue, int customerClass, int lastPurchaseYear) {
@@ -28,27 +30,55 @@ public class Customer {
         calculateDiscount();
         calculateFinalValue();
     }
-    
+
     // This method calculates the discout based on the year of the last purchase and customer class.
-    // TODO: Implement function to calculate proper discount.
     private void calculateDiscount() {
-        this.discount = 0.9;
+        // Assign currentYear to a distinct variable to make it easier to change later
+        int currentYear = 2024;
+
+        // Use switch to loop through the set of customer classes
+        switch (this.customerClass) {
+            case 1 -> {
+                // Use if/else condition for each customer class to set a specific discount
+                // based on the year of the last purchase
+                if (this.lastPurchaseYear == currentYear) {
+                    this.discount = 0.3;
+                } else if (this.lastPurchaseYear < currentYear && this.lastPurchaseYear >= currentYear - 5) {
+                    this.discount = 0.2;
+                } else if (this.lastPurchaseYear < currentYear - 5) {
+                    this.discount = 0.1;
+                }
+            }
+            case 2 -> {
+                if (this.lastPurchaseYear == currentYear) {
+                    this.discount = 0.15;
+                } else if (this.lastPurchaseYear < currentYear && this.lastPurchaseYear >= currentYear - 5) {
+                    this.discount = 0.13;
+                } else if (this.lastPurchaseYear < currentYear - 5) {
+                    this.discount = 0.05;
+                }
+            }
+            case 3 -> {
+                if (this.lastPurchaseYear == currentYear) {
+                    this.discount = 0.03;
+                } else {
+                    this.discount = 0;
+                }
+            }
+            default -> throw new IllegalArgumentException("Illegal class value: " + this.customerClass + ", for user: " + this.name);
+        }
     }
-    
-    // This method calculates the final value based on the base value and the customer class.
+
+    // This method calculates the final value based on the base value and the discount.
     private void calculateFinalValue() {
-        this.finalValue = this.baseValue * this.discount;
+        this.finalValue = this.baseValue * (1 - this.discount);
     }
-    
-    // Getters methods
+
+    // Getter methods
     public String getName() {
         return this.name;
     }
-    
-    public double getBaseValue() {
-        return this.baseValue;
-    }
-    
+
     public double getFinalValue() {
         return this.finalValue;
     }
