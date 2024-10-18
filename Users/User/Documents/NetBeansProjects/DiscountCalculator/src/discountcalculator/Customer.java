@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package discountcalculator;
 
 import java.time.Year;
 
-/**
- *
- * @author User
- */
+
 public class Customer {
     // List of Customer's properties
     private String name;
@@ -27,6 +20,7 @@ public class Customer {
         this.customerClass = customerClass;
         this.lastPurchaseYear = lastPurchaseYear;
 
+        // Call local methods to calculate discount and final value
         calculateDiscount();
         calculateFinalValue();
     }
@@ -42,10 +36,13 @@ public class Customer {
                 // Use if/else condition for each customer class to set a specific discount
                 // based on the year of the last purchase
                 if (this.lastPurchaseYear == currentYear) {
+                    // If the last purchase has been made this year
                     this.discount = 0.3;
                 } else if (this.lastPurchaseYear < currentYear && this.lastPurchaseYear >= currentYear - 5) {
+                    // If the last purchase has been made more than 1 and less than 5 years ago
                     this.discount = 0.2;
                 } else if (this.lastPurchaseYear < currentYear - 5) {
+                    // If the last purchase has been made more than 5 years ago
                     this.discount = 0.1;
                 }
             }

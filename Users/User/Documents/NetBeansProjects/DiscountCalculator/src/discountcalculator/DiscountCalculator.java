@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package discountcalculator;
 
 import java.io.BufferedReader;
@@ -9,22 +5,23 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-/**
- *
- * @author User
- */
-public class DiscountCalculator {
 
+public class DiscountCalculator {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Declared paths to input and outputs file in the following variablse.
+        /*
+         * Link to GitHub repo:
+         *
+         * https://github.com/Iverick/Discount-Calculator/tree/master/Users/User/Documents/NetBeansProjects/DiscountCalculator/src/discountcalculator
+         */
+        // Declared paths to input and outputs file in the following variables.
         // Makes it easier to change it later.
         String inputFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DiscountCalculator\\src\\discountcalculator\\customers.txt";
         String outputFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DiscountCalculator\\src\\discountcalculator\\customerdiscount.txt";
         
-        // Call this method to read an input file.
+        // Call readInputFile method to read an input file.
         readInputFile(inputFilePath, outputFilePath);
     }
 
@@ -64,7 +61,7 @@ public class DiscountCalculator {
                     // Create a new customer with the data read from the input file.
                     Customer customer = new Customer(userName, baseValue, customerClass, lastPurchaseYear);
                     
-                    // Call the method to populate output file with proper data
+                    // Call writeOutputFile method to populate output file with proper data
                     writeOutputFile(customer, outputFilePath);
                 } catch (Exception e) {
                     System.err.println(e);
