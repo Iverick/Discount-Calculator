@@ -56,13 +56,19 @@ public class DiscountCalculator {
                 // 
                 // TODO: Implement validations.
                 try {
-                    double baseValue = Double.parseDouble(baseValueString);
-                    int customerClass = Integer.parseInt(customerClassString);
-                    int lastPurchaseYear = Integer.parseInt(lastPurchaseYearString);
-                    
+                    // Call validateCustomerName method to check if provided customerName value
+                    // fulfills requied criteria.
+                    // I had to do it differently from other fields because customerName variable has
+                    // already been assigned with value at this point.
                     if (!validateCustomerName(customerName)) {
+                        // Stop executing function if validation failed
                         continue;
                     }
+
+                    double baseValue = Double.parseDouble(baseValueString);
+                    // Use validateCustomerClass method to validate customerClass value and convert in into an integer
+                    int customerClass = validateCustomerClass(customerName, customerClassString);
+                    int lastPurchaseYear = Integer.parseInt(lastPurchaseYearString);
 
                     // Create a new customer with the data read from the input file.
                     Customer customer = new Customer(customerName, baseValue, customerClass, lastPurchaseYear);
@@ -103,21 +109,22 @@ public class DiscountCalculator {
     }
 
     /**
-     * This method validates if provided customer name is valid.
-     * Check if customer name contains a space, 
-     * customer first name has only lowercase and uppercase letters
-     * and customer last name has only lowercase, uppercase letters or numbers
+     * This method validates if provided customer name is valid. Check if
+     * customer name contains a space, customer first name has only lowercase
+     * and uppercase letters and customer last name has only lowercase,
+     * uppercase letters or numbers
      *
      * @param customerName customer name read from an input file
+     * @return if provided customer name passed validation
      */
     private static boolean validateCustomerName(String customerName) {
         // Check if customer name contains a space
-        if (!customerName.contains(" ")){
+        if (!customerName.contains(" ")) {
             // Show error message and return false if it doesn't
             System.err.println("Customer name must contain a space: " + customerName);
             return false;
         }
-        
+
         // Split customer name into first name and last name
         String firstName = customerName.split(" ")[0];
         String lastName = customerName.split(" ")[1];
@@ -138,5 +145,34 @@ public class DiscountCalculator {
 
         // Return true if customer name is valid
         return true;
+    }
+
+    /**
+     * This method validates if provided customer class is a number between 1
+     * and 3.
+     *
+     * @param customerName customer name read from an input file
+     * @param customerClassString customer class read from an input file
+     * @return customerClass customer class converted into integer value
+     */
+    private static int validateCustomerClass(String customerName, String customerClassString) {
+        // Cover code into a try/catch block to show a custom error message
+        // and stop executing function if provided customer class value is invalid.
+        try {
+            // Try to convert customerClass value into integer
+            int customerClass = Integer.parseInt(customerClassString);
+
+            // Check is customerClass value between 1 and 3
+            if (customerClass < 1 || customerClass > 3) {
+                // Throw exception if it doesn't
+                throw new NumberFormatException();
+            }
+
+            // Return customerClass value
+            return customerClass;
+        } catch (NumberFormatException e) {
+            // Custom error message displayed if validation failed
+            throw new NumberFormatException("Invalid class for customer: " + customerName + ", it must be a number between 1 and 3!");
+        }
     }
 }
