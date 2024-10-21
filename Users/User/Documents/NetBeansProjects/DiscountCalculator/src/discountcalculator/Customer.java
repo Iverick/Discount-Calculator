@@ -28,7 +28,7 @@ public class Customer {
     // This method calculates the discout based on the year of the last purchase and customer class.
     private void calculateDiscount() {
         // Assign currentYear to a distinct variable to make it easier to change later
-        int currentYear = 2024;
+        int currentYear = Year.now().getValue();
 
         // Use switch to loop through the set of customer classes
         switch (this.customerClass) {
@@ -78,5 +78,14 @@ public class Customer {
 
     public double getFinalValue() {
         return this.finalValue;
+    }
+    
+    /* Add this method to Covert finalValue into String with string formatter
+     * Did that to avoid writing weird values like "159.79999999999998" into an output file
+     * 
+     * @return    formatted finalValue converted into String
+     */
+    public String getConvertedFinalValue() {
+        return String.format("%.2f", this.finalValue);
     }
 }

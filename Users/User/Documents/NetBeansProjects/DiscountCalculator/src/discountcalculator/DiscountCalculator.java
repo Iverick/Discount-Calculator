@@ -54,8 +54,6 @@ public class DiscountCalculator {
                 // The following block converts string variables into a data
                 // that can be assigned to properties of Customer object.
                 // Use try/catch block here to perform validation checks.
-                // 
-                // TODO: Implement validations.
                 try {
                     // Call validateCustomerName method to check if provided customerName value
                     // fulfills requied criteria.
@@ -97,19 +95,13 @@ public class DiscountCalculator {
         try {
             // Create a writer object which is used to add data to the output file
             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath, true));
-            
-            // Get final value calculated in a Customer object
-            double finalValue = customer.getFinalValue();
-            // Covert finalValue into String with string formatter
-            // Did that to avoid writing weird values like "159.79999999999998" into an output file
-            String convertedFinalValue = String.format("%.2f", finalValue);
 
-            // And user name on the first line
+            // Add user name on the first line
             writer.write(customer.getName());
             // Move cursor to the new line
             writer.newLine();
             // Repeat process for the converted final value
-            writer.write(convertedFinalValue);
+            writer.write(customer.getConvertedFinalValue());
             writer.newLine();
             // Close the file after we are done writing into it
             writer.close();
@@ -125,7 +117,7 @@ public class DiscountCalculator {
      * uppercase letters or numbers
      *
      * @param customerName customer name read from an input file
-     * @return if provided customer name passed validation
+     * @return             if provided customer name passed validation
      */
     private static boolean validateCustomerName(String customerName) {
         // Check if customer name contains a space
@@ -181,9 +173,9 @@ public class DiscountCalculator {
      * This method validates if provided customer class is a number between 1
      * and 3.
      *
-     * @param customerName customer name read from an input file
+     * @param customerName        customer name read from an input file
      * @param customerClassString customer class read from an input file
-     * @return customerClass customer class converted into integer value
+     * @return customerClass      customer class converted into integer value
      */
     private static int validateCustomerClass(String customerName, String customerClassString) {
         // Cover code into a try/catch block to show a custom error message
