@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.Year;
 
 public class DiscountCalculator {
 
@@ -68,7 +69,8 @@ public class DiscountCalculator {
                     double baseValue = Double.parseDouble(baseValueString);
                     // Use validateCustomerClass method to validate customerClass value and convert in into an integer
                     int customerClass = validateCustomerClass(customerName, customerClassString);
-                    int lastPurchaseYear = Integer.parseInt(lastPurchaseYearString);
+                    // Use validatePurchaseYear method to validate that a lastPurchaseYear value is valid and convert in into an integer
+                    int lastPurchaseYear = validatePurchaseYear(customerName, lastPurchaseYearString);
 
                     // Create a new customer with the data read from the input file.
                     Customer customer = new Customer(customerName, baseValue, customerClass, lastPurchaseYear);
@@ -151,9 +153,9 @@ public class DiscountCalculator {
      * This method validates if provided customer class is a number between 1
      * and 3.
      *
-     * @param customerName customer name read from an input file
+     * @param customerName        customer name read from an input file
      * @param customerClassString customer class read from an input file
-     * @return customerClass customer class converted into integer value
+     * @return customerClass      customer class converted into integer value
      */
     private static int validateCustomerClass(String customerName, String customerClassString) {
         // Cover code into a try/catch block to show a custom error message
@@ -162,7 +164,7 @@ public class DiscountCalculator {
             // Try to convert customerClass value into integer
             int customerClass = Integer.parseInt(customerClassString);
 
-            // Check is customerClass value between 1 and 3
+            // Check if customerClass value between 1 and 3
             if (customerClass < 1 || customerClass > 3) {
                 // Throw exception if it doesn't
                 throw new NumberFormatException();
@@ -173,6 +175,39 @@ public class DiscountCalculator {
         } catch (NumberFormatException e) {
             // Custom error message displayed if validation failed
             throw new NumberFormatException("Invalid class for customer: " + customerName + ", it must be a number between 1 and 3!");
+        }
+    }
+    
+    
+    /**
+     * This method validates if provided last purchase year class is a valid year value 
+     * between 2000 and now, and coverts value into an integer.
+     *
+     * @param customerName           customer name read from an input file
+     * @param lastPurchaseYearString last purchase year for customer read from an input file
+     * @return lastPurchaseYear      last purchase year for customer converted into integer value
+     */
+    private static int validatePurchaseYear(String customerName, String lastPurchaseYearString){
+        // Cover code into a try/catch block to show a custom error message
+        // and stop executing function if provided last purchase year value is invalid.
+        try {
+            // Try to convert lastPurchaseYear value into an integer
+            int lastPurchaseYear = Integer.parseInt(lastPurchaseYearString);
+            
+            // Use built-in Java library to get a current year value
+            int currentYear = Year.now().getValue();
+            
+            // Check if lastPurchaseYear value is between 2000 and now
+            if (lastPurchaseYear < 2000 || lastPurchaseYear > currentYear) {
+                // Throw NumberFormatException exception if it doesn't
+                throw new NumberFormatException();
+            }
+            
+            // Return lastPurchaseYear value
+            return lastPurchaseYear;
+        } catch (NumberFormatException e) {
+            // Custom error message displayed if validation failed
+            throw new NumberFormatException("Invalid purchase year for customer: " + customerName + ", please enter a valid year between 2000 and now!");
         }
     }
 }
