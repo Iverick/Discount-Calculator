@@ -97,12 +97,19 @@ public class DiscountCalculator {
         try {
             // Create a writer object which is used to add data to the output file
             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath, true));
+            
+            // Get final value calculated in a Customer object
+            double finalValue = customer.getFinalValue();
+            // Covert finalValue into String with string formatter
+            // Did that to avoid writing weird values like "159.79999999999998" into an output file
+            String convertedFinalValue = String.format("%.2f", finalValue);
+
             // And user name on the first line
             writer.write(customer.getName());
             // Move cursor to the new line
             writer.newLine();
-            // Repeat process for the final value calculated in a Customer object
-            writer.write(Double.toString(customer.getFinalValue()));
+            // Repeat process for the converted final value
+            writer.write(convertedFinalValue);
             writer.newLine();
             // Close the file after we are done writing into it
             writer.close();
