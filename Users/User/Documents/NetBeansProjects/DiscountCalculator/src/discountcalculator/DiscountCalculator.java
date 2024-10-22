@@ -19,7 +19,7 @@ public class DiscountCalculator {
          */
 
         // Declared paths to input and outputs file in the following variables.
-        // Makes it easier to change it later.
+        // Makes it easier to change them later.
         String inputFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DiscountCalculator\\src\\discountcalculator\\customers.txt";
         String outputFilePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DiscountCalculator\\src\\discountcalculator\\customerdiscount.txt";
 
@@ -60,7 +60,7 @@ public class DiscountCalculator {
                     // I had to do it differently from other fields because customerName variable has
                     // already been assigned with value at this point.
                     if (!validateCustomerName(customerName)) {
-                        // Stop executing function if validation failed
+                        // Stop executing loop if validation failed
                         continue;
                     }
 
@@ -131,14 +131,14 @@ public class DiscountCalculator {
         String firstName = customerName.split(" ")[0];
         String lastName = customerName.split(" ")[1];
 
-        // Check if customer first name matches requied critea
+        // Use regular expression to check if customer first name matches requied criteria
         if (!firstName.matches("[a-zA-Z]+")) {
             // Show error message and return false if it doesn't
             System.err.println("Invalid first name for customer: " + customerName);
             return false;
         }
 
-        // Check if customer first name matches requied critea
+        // Use regular expression to check if customer first name matches requied criteria
         if (!lastName.matches("[a-zA-Z0-9]+")) {
             // Show error message and return false if it doesn't
             System.err.println("Invalid surname name for customer: " + customerName);
@@ -170,8 +170,7 @@ public class DiscountCalculator {
     }
     
     /**
-     * This method validates if provided customer class is a number between 1
-     * and 3.
+     * This method validates if provided customer class is a number between 1 and 3.
      *
      * @param customerName        customer name read from an input file
      * @param customerClassString customer class read from an input file
@@ -203,10 +202,9 @@ public class DiscountCalculator {
      * year value between 2000 and now, and coverts value into an integer.
      *
      * @param customerName customer name read from an input file
-     * @param lastPurchaseYearString last purchase year for customer read from
-     * an input file
-     * @return lastPurchaseYear last purchase year for customer converted into
-     * integer value
+     * @param lastPurchaseYearString last purchase year for customer read from an input file
+     * 
+     * @return lastPurchaseYear last purchase year for customer converted into integer value
      */
     private static int validatePurchaseYear(String customerName, String lastPurchaseYearString) {
         // Cover code into a try/catch block to show a custom error message
