@@ -18,9 +18,10 @@ public class CA2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //System.out.println(checkArrayForDuplicates());
-        diagonalSum();
-        //bubbleSort();
+        // System.out.println(checkArrayForDuplicates());
+        multiplicationTable();
+        // diagonalSum();
+        // bubbleSort();
     }
     
     // Task 1: Array Search – Find the First Repeated Element
@@ -40,6 +41,34 @@ public class CA2 {
         }
         
         return "No repeated elements found.";
+    }
+    
+    // Task 2: Multiplication Table Using 2D Array
+    private static void multiplicationTable() {
+        Scanner sc = new Scanner(System.in);
+        
+        // Ask user for multiplication table size
+        System.out.println("Enter size of multiplication table:");
+        int size = sc.nextInt();
+        
+        // Create an empty 2D array of required size
+        int[][] matrix = new int[size][size];
+        
+        // Loop through the array fields and populate them with proper values
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = (i + 1) * (j + 1);
+            }
+        }
+        
+        // Display multiplication table output
+        System.out.println("Your multiplication table looks the following:");
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.println(matrix[i][j] + "");
+            }
+            System.out.println(" ");
+        }
     }
     
     // Task 3: Diagonal Sum of a Matrix
