@@ -63,12 +63,7 @@ public class CA2 {
         
         // Display multiplication table output
         System.out.println("Your multiplication table looks the following:");
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.println(matrix[i][j] + "");
-            }
-            System.out.println(" ");
-        }
+        displayMatrix(matrix);
     }
     
     // Task 3: Diagonal Sum of a Matrix
@@ -97,12 +92,7 @@ public class CA2 {
         
         // Display matrix
         System.out.println("Your matrix is:");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                System.out.println(matrix[i][j] + "");
-            }
-            System.out.println(" ");
-        }
+        displayMatrix(matrix);
         
         // Loop through matrix to calculate main and secondary diagonal sums
         for (int i = 0; i < rows; i++) {
@@ -182,5 +172,15 @@ public class CA2 {
         }
         
         return inputArray;
+    }
+    
+    private static void displayMatrix(int[][] matrix) {
+        // Helper method iterates over matrix fields and displays their values on the screen
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.println(matrix[i][j] + "");
+            }
+            System.out.println(" ");
+        }
     }
 }
